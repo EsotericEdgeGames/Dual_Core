@@ -47,19 +47,21 @@ size = Vector2i(540, 645)
 render_target_update_mode = 4
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="GridContainer/SubViewportContainer/SubViewport"]
-transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -14, 4, 9)
+transform = Transform3D(1.04723, 0, 0.278097, 0, 1, 0, -0.280603, 0, 1.03787, -14, 3.1332, 8.17654)
 script = ExtResource("1_nnq13")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GridContainer/SubViewportContainer/SubViewport/CharacterBody3D"]
+transform = Transform3D(1.00404, 0, 1.49012e-08, 0, 1, 0, -8.9407e-08, 0, 0.984932, 0, 0, 0)
 shape = SubResource("BoxShape3D_cxs54")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="GridContainer/SubViewportContainer/SubViewport/CharacterBody3D/CollisionShape3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.03769, 2, 11.0735)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 2.98023e-08, 0, 1, -5.03769, 2, 11.0735)
 mesh = SubResource("BoxMesh_52qhg")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ORMMaterial3D_odo2q")
 
 [node name="Camera3D" type="Camera3D" parent="GridContainer/SubViewportContainer/SubViewport/CharacterBody3D"]
+transform = Transform3D(0.922367, 0, 1.49012e-08, 0, 1, 0, 1.49012e-08, 0, 0.930679, 0, 0, 0)
 
 [node name="SubViewportContainer2" type="SubViewportContainer" parent="GridContainer"]
 layout_mode = 2
@@ -101,3 +103,7 @@ mesh = SubResource("BoxMesh_eoipe")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 48, -7)
 sky_mode = 1
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.989832, 0.131022, 0.0553748, 0.0216408, -0.523476, 0.851766, 0.140588, -0.841906, -0.520989, 0.440671, 5.1043, -0.266678)
+shadow_enabled = true
