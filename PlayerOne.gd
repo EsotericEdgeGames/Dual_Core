@@ -1,11 +1,31 @@
 extends CharacterBody3D
 @export var player_id = 1
-const SPEED = 5.0
+var SPEED = 5.0
 const JUMP_VELOCITY = 4.5
-
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+var sprinting = false
+var speedWalk = 5.0
+var speedRun = 10.0
+# variables that make the character run
+
+@onready var sprint_timer = $"Sprint timer"
+	
+func _process(delta):
+	SPEED = speedWalk
+	
+	if Input.is_action_just_pressed("Sprint")and not sprinting:
+		sprinting = true
+		sprint_timer.start()
+	elif Input.is_action_just_pressed("Sprint") and sprinting:
+		sprinting = false
+	
+	if sprinting:
+		SPEED = speedRun
+
+func _on_timer_timeout():
+	sprinting = false
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -28,3 +48,5 @@ func _physics_process(delta):
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
+
+
