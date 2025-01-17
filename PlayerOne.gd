@@ -1,11 +1,11 @@
 extends CharacterBody3D
 @export var player_id = 1
-var SPEED = 5.0
+var speed = 5.0
 const JUMP_VELOCITY = 4.5
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
-var sprinting = false
+var is_sprinting = false
 var speedWalk = 5.0
 var speedRun = 10.0
 # variables that make the character run
@@ -13,19 +13,19 @@ var speedRun = 10.0
 @onready var sprint_timer = $"Sprint timer"
 	
 func _process(delta):
-	SPEED = speedWalk
+	speed = speedWalk
 	
-	if Input.is_action_just_pressed("Sprint")and not sprinting:
-		sprinting = true
+	if Input.is_action_just_pressed("Sprint")and not is_sprinting:
+		is_sprinting = true
 		sprint_timer.start()
-	elif Input.is_action_just_pressed("Sprint") and sprinting:
-		sprinting = false
+	elif Input.is_action_just_pressed("Sprint") and is_sprinting:
+		is_sprinting = false
 	
-	if sprinting:
-		SPEED = speedRun
+	if is_sprinting:
+		speed = speedRun
 
 func _on_timer_timeout():
-	sprinting = false
+	is_sprinting = false
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -41,11 +41,11 @@ func _physics_process(delta):
 	var input_dir = Input.get_vector("move_left_1", "move_right_1", "move_up_1", "move_down_1")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
+		velocity.x = direction.x * speed
+		velocity.z = direction.z * speed
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0, speed)
+		velocity.z = move_toward(velocity.z, 0, speed)
 
 	move_and_slide()
 
